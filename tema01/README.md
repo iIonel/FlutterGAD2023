@@ -1,6 +1,10 @@
 # tema01
 
-A new Flutter project.
+Lei-Euro Convertor
+
+![proba1](https://user-images.githubusercontent.com/45739581/230049549-076e0867-2a96-4a3a-ac4e-b98c5bbfa3ce.PNG)
+![proba2](https://user-images.githubusercontent.com/45739581/230049566-8c7f98b0-27f3-42fe-aae0-907b396fe523.PNG)
+
 
 ## Getting Started
 
