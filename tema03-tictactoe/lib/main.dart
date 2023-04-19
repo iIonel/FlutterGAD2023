@@ -28,7 +28,6 @@ class _TicTacToeState extends State<_TicTacToe> {
   Color currentColor = Colors.red;
   bool end = false;
 
-
   @override
   void initState(){
     super.initState();
