@@ -1,6 +1,10 @@
 # tema03_tictactoe
 
-A new Flutter project.
+Tic Tac Toe project.
+
+![image](https://user-images.githubusercontent.com/45739581/233052108-c3263f90-f282-4690-a5e2-150bee18d493.png)
+![image](https://user-images.githubusercontent.com/45739581/233052214-f904db6b-3f1c-48c8-a542-8141cb6a02c6.png)
+![image](https://user-images.githubusercontent.com/45739581/233052271-f97c46cf-7c74-4eb9-a01a-e06b3ccbf33d.png)
 
 ## Getting Started
 
