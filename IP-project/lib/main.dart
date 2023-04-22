@@ -1,115 +1,431 @@
+import 'dart:ui';
+import 'package:universal_io/io.dart';
 import 'package:flutter/material.dart';
+import 'package:ip_project/profile.dart';
 
-void main() {
-  runApp(const MyApp());
+void main(){
+  runApp(app());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class app extends StatelessWidget {
+  const app({Key? key}) : super(key: key);
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // Try running your application with "flutter run". You'll see the
-        // application has a blue toolbar. Then, without quitting the app, try
-        // changing the primarySwatch below to Colors.green and then invoke
-        // "hot reload" (press "r" in the console where you ran "flutter run",
-        // or simply save your changes to "hot reload" in a Flutter IDE).
-        // Notice that the counter didn't reset back to zero; the application
-        // is not restarted.
-        primarySwatch: Colors.blue,
-      ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: _app(),
     );
   }
-}
+}bool _homeAction = false;
+bool _institutieAction = false;
+bool _contactAction = false;
+bool _contumeuAction = false;
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
 
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
-
-  final String title;
+class _app extends StatefulWidget {
+  const _app({Key? key}) : super(key: key);
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<_app> createState() => _appState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-    });
-  }
+class _appState extends State<_app> {
 
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
-    return Scaffold(
-      appBar: AppBar(
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
-      ),
-      body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Invoke "debug painting" (press "p" in the console, choose the
-          // "Toggle Debug Paint" action from the Flutter Inspector in Android
-          // Studio, or the "Toggle Debug Paint" command in Visual Studio Code)
-          // to see the wireframe for each widget.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
+    return MaterialApp(
+      title: 'Account Page',
+      home: Scaffold(
+        backgroundColor: Color(0xFF101c2b),
+        appBar: AppBar(
+          elevation: 0,
+          backgroundColor: Colors.transparent,
+          title: Center(
+            child: Text(
+              'Salut, Prenume Nume!',
+              style: TextStyle(
+                fontFamily: 'Book Antiqua Font',
+                fontSize: 25,
+                color: Color(0xFFe5e7e8),
+              ),
             ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
+          ),
+        ),
+        body: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            Stack(
+              children: <Widget>[
+                Image.asset(
+                  'assets/images/city.png',
+                  height: 130,
+                  width: 500,
+                  fit: BoxFit.cover,
+                ),
+                Container(
+                  padding: EdgeInsets.only(top:100, bottom: 10),
+                  child: Container(
+                    width: 500,
+                    height: 490,
+                    decoration: BoxDecoration(
+                      color: Color(0xFF293441),
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(50),
+                        topRight: Radius.circular(50),
+                      ),
+                    ),
+                    child: Column(
+                      children: <Widget>[
+                        Container(
+                          padding: EdgeInsets.only(top: 20),
+                          child: Text(
+                            'Contul meu',
+                            style: TextStyle(
+                              fontSize: 35,
+                              color: Color(0xFFe5e7e8),
+                              fontFamily: 'Louis George Cafe',
+                            ),
+                          ),
+                        ),
+                        Container(
+                          height: 80,
+                          decoration: BoxDecoration(
+                            border: Border(
+                              bottom: BorderSide(
+                                color: Color(0xFFe5e7e8),
+                                width: 1.5,
+                              ),
+                            ),
+                          ),
+                          child: GestureDetector(
+                            onTap: () => Navigator.of(context).push(new MaterialPageRoute(
+                                builder: (BuildContext context) => new profile())),
+                            child: Row(
+                              children: <Widget>[
+                                Container(
+                                  padding: EdgeInsets.only(top: 20, left: 10),
+                                  child: Image.asset(
+                                    'assets/images/date_personale.png',
+                                    width: 75,
+                                  ),
+                                ),
+                                Container(
+                                  padding: EdgeInsets.only(top:15, left: 0),
+                                  child: Text(
+                                    'Date personale',
+                                    style: TextStyle(
+                                      color: Color(0xFFe5e7e8),
+                                      fontFamily: 'Louis George Cafe',
+                                      fontSize: 30,
+                                    ),
+                                  ),
+                                ),
+                                Container(
+                                  padding: EdgeInsets.only(top:15, left: 70),
+                                  child: Image.asset(
+                                    'assets/images/next.png',
+                                    width: 35,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        Container(
+                          height: 80,
+                          decoration: BoxDecoration(
+                            border: Border(
+                              bottom: BorderSide(
+                                color: Color(0xFFe5e7e8),
+                                width: 1.5,
+                              ),
+                            ),
+                          ),
+                          child: Row(
+                            children: <Widget>[
+                              Container(
+                                padding: EdgeInsets.only(top: 18, left: 10),
+                                child: Image.asset(
+                                  'assets/images/istoricul_cautarilor.png',
+                                  width: 75,
+                                ),
+                              ),
+                              Container(
+                                padding: EdgeInsets.only(top:15, left: 0),
+                                child: Text(
+                                  'Istoricul cautarilor',
+                                  style: TextStyle(
+                                    color: Color(0xFFe5e7e8),
+                                    fontFamily: 'Louis George Cafe',
+                                    fontSize: 30,
+                                  ),
+                                ),
+                              ),
+                              Container(
+                                padding: EdgeInsets.only(top:15, left: 30),
+                                child: Image.asset(
+                                  'assets/images/next.png',
+                                  width: 35,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Container(
+                          height: 80,
+                          decoration: BoxDecoration(
+                            border: Border(
+                              bottom: BorderSide(
+                                color: Color(0xFFe5e7e8),
+                                width: 1.5,
+                              ),
+                            ),
+                          ),
+                          child: Row(
+                            children: <Widget>[
+                              Container(
+                                padding: EdgeInsets.only(top: 20, left: 10),
+                                child: Image.asset(
+                                  'assets/images/schimbare_parola.png',
+                                  width: 75,
+                                ),
+                              ),
+                              Container(
+                                padding: EdgeInsets.only(top:15, left: 0),
+                                child: Text(
+                                  'Schimbare parola',
+                                  style: TextStyle(
+                                    color: Color(0xFFe5e7e8),
+                                    fontFamily: 'Louis George Cafe',
+                                    fontSize: 30,
+                                  ),
+                                ),
+                              ),
+                              Container(
+                                padding: EdgeInsets.only(top:15, left: 33),
+                                child: Image.asset(
+                                  'assets/images/next.png',
+                                  width: 35,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Container(
+                          height: 80,
+                          decoration: BoxDecoration(
+                            border: Border(
+                              bottom: BorderSide(
+                                color: Color(0xFFe5e7e8),
+                                width: 1.5,
+                              ),
+                            ),
+                          ),
+                          child: Row(
+                            children: <Widget>[
+                              Container(
+                                padding: EdgeInsets.only(top: 20, left: 10),
+                                child: Image.asset(
+                                  'assets/images/document_in_decurs.png',
+                                  width: 70,
+                                ),
+                              ),
+                              Container(
+                                padding: EdgeInsets.only(top:15, left: 0),
+                                child: Text(
+                                  'Document in decurs',
+                                  style: TextStyle(
+                                    color: Color(0xFFe5e7e8),
+                                    fontFamily: 'Louis George Cafe',
+                                    fontSize: 30,
+                                  ),
+                                ),
+                              ),
+                              Container(
+                                padding: EdgeInsets.only(top:15, left: 10),
+                                child: Image.asset(
+                                  'assets/images/next.png',
+                                  width: 35,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Container(
+                          height: 80,
+                          decoration: BoxDecoration(
+                            border: Border(
+                              bottom: BorderSide(
+                                color: Color(0xFFe5e7e8),
+                                width: 1.5,
+                              ),
+                            ),
+                          ),
+                          child: Row(
+                            children: <Widget>[
+                              Container(
+                                padding: EdgeInsets.only(top: 20, left: 10),
+                                child: Image.asset(
+                                  'assets/images/deconectare.png',
+                                  width: 75,
+                                ),
+                              ),
+                              Container(
+                                padding: EdgeInsets.only(top:15, left: 0),
+                                child: Text(
+                                  'Deconectare',
+                                  style: TextStyle(
+                                    color: Color(0xFFe5e7e8),
+                                    fontFamily: 'Louis George Cafe',
+                                    fontSize: 30,
+                                  ),
+                                ),
+                              ),
+                              Container(
+                                padding: EdgeInsets.only(top:15, left: 100),
+                                child: Image.asset(
+                                  'assets/images/next.png',
+                                  width: 35,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            crossAxisAlignment: CrossAxisAlignment.center,
+
+            children: <Widget>[
+              GestureDetector(
+                onTap: (){
+                  setState(() {
+                    _homeAction = !_homeAction;
+                  });
+                },
+                child: Container(
+                    child: _homeAction?
+                    Image.asset(
+                      'assets/images/home2.png',
+                      width: 45,
+                    ):
+                    Image.asset(
+                      'assets/images/home1.png',
+                      width: 45,
+                    ),
+                  ),
+              ),
+
+              GestureDetector(
+                onTap: (){
+                  setState(() {
+                    _institutieAction = !_institutieAction;
+                  });
+                },
+                child: Container(
+                  child:  _institutieAction?
+                  Image.asset(
+                    'assets/images/institutie2.png',
+                    width: 45,
+                  ):
+                  Image.asset(
+                    'assets/images/institutie1.png',
+                    width: 45,
+                  ),
+                ),
+              ),
+              GestureDetector(
+                onTap: (){
+                  setState(() {
+                    _contactAction = !_contactAction;
+                  });
+                },
+                child: Container(
+                  child: _contactAction?
+                  Image.asset(
+                    'assets/images/contact2.png',
+                    width: 45,
+                  ):
+                  Image.asset(
+                    'assets/images/contact1.png',
+                    width: 45,
+                  ),
+                ),
+              ),
+              GestureDetector(
+                onTap: (){
+                  setState(() {
+                    _contumeuAction = !_contumeuAction;
+                  });
+                },
+                child: Container(
+                  child: _contumeuAction?
+                  Image.asset(
+                    'assets/images/contul_meu2.png',
+                    width: 45,
+                  ):
+                  Image.asset(
+                    'assets/images/contul_meu1.png',
+                    width: 45,
+                  ),
+                ),
+              ),
+            ],
+          ),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Container(
+                  padding: EdgeInsets.only(left: 30),
+                  child: Text(
+                    'Home',
+                    style: TextStyle(
+                      fontFamily: 'Louis George Cafe',
+                      color: Color(0xFFe5e7e8),
+                    ),
+                  ),
+                ),
+                Container(
+                  padding: EdgeInsets.only(left: 55),
+                  child: Text(
+                    'Institutie',
+                    style: TextStyle(
+                      fontFamily: 'Louis George Cafe',
+                      color: Color(0xFFe5e7e8),
+                    ),
+                  ),
+                ),
+                Container(
+                  padding: EdgeInsets.only(left: 47),
+                  child: Text(
+                    'Contact',
+                    style: TextStyle(
+                      fontFamily: 'Louis George Cafe',
+                      color: Color(0xFFe5e7e8),
+                    ),
+                  ),
+                ),
+                Container(
+                  padding: EdgeInsets.only(left: 35),
+                  child: Text(
+                    'Contul meu',
+                    style: TextStyle(
+                      fontFamily: 'Louis George Cafe',
+                      color: Color(0xFFe5e7e8),
+                    ),
+                  ),
+                ),
+              ],
             ),
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
