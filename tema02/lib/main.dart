@@ -1,4 +1,5 @@
 import 'dart:ffi';
+import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -22,23 +23,42 @@ class MyStatefulWidget extends StatefulWidget {
 
 class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   TextEditingController _number = TextEditingController();
-  bool _visible = false;
+  String _option = '';
 
+  bool isSquare(int number){
+    double square = sqrt(number);
+    if(number == square.toInt()*square.toInt())
+      return true;
+    return false;
+  }
+
+  bool isTriangle(int number){
+   for(var i = 0; i < sqrt(number); ++i){
+     if(i * i * i == number)
+       return true;
+   }
+    return false;
+  }
+
+  bool isNeither(int number){
+    if(isTriangle(number) == false && isSquare(number) == false)
+        return true;
+    return false;
+  }
 
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Center(
             child: Text(
-                'Number Shapes'
+                'Number Shapes',
             )
         ),
       ),
       body: GestureDetector(
         onTap: (){
           setState(() {
-           if(_visible == true)
-             _visible = false;
+
           });
         },
         child: SingleChildScrollView(
@@ -62,67 +82,96 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(top:100),
-              child: Visibility(
-                visible: _visible,
-                child: Container(
-                  color: Colors.yellow,
-                  width: 300,
-                  height: 100,
+              padding: const EdgeInsets.only(top: 550, left: 300),
+              child: FloatingActionButton(
+                onPressed: (){
+                  setState(() {
+                    if(_number != null) {
+                      int numberFromText = int.parse(_number.text);
+                      if(isTriangle(numberFromText) == true && isSquare(numberFromText) == false){
+                        _option = 'triangle';
+                      }
+                      else if(isSquare(numberFromText) == true && isTriangle(numberFromText) == false){
+                        _option = 'square';
+                      }
+                      else if(isNeither(numberFromText) == true){
+                        _option = 'neither';
+                      }
+                      else{
+                        _option = 'either';
+                      }
+                      showAlert(context,numberFromText,_option);
+                    }
+                  });
+                  },
+                tooltip: 'take number',
+                child: Icon(Icons.check),
+              ),
+            ),
+            ],
+          ),
+        )
+      )
+    );
+  }
+}
 
+showAlert(BuildContext context,int number, String option) {
+
+  showDialog(
+      context: context,
+      builder: (_) => new AlertDialog(
+      shape: RoundedRectangleBorder(
+        borderRadius:
+        BorderRadius.all(Radius.circular(10.0))
+      ),
+      content: Builder(
+        builder: (context) {
+          var height = MediaQuery.of(context).size.height;
+          var width = MediaQuery.of(context).size.width;
+          return Container(
+            height: height - 750,
+            width: width - 100,
+            child: Column(
+              children: <Widget>[
+                Text(
+                  '$number',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(top:20),
                   child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Padding(
-                        padding: const EdgeInsets.all(16.0),
-                        child: Text(
-                          ' ',
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 15,
-                          ),
+                    children: [
+                      if(option == 'square')...[
+                        Text(
+                          'Number $number is SQUARE',
                         ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 6,right: 16,left: 16,bottom: 16),
-                        child: Text(
-                          'Number',
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 10,
-                          ),
+                      ]
+                      else if(option == 'triangle')...[
+                        Text(
+                          'Number $number is TRIANGLE',
                         ),
-                      ),
+                      ]
+                      else if(option == 'neither')...[
+                          Text(
+                            'Number $number is neither SQUARE and TRIANGLE',
+                          ),
+                        ]
+                        else if(option == 'either')...[
+                            Text(
+                              'Number $number is both SQUARE and TRIANGLE',
+                            ),
+                          ]
                     ],
                   ),
                 ),
-              ),
+              ],
             ),
-            Visibility(
-              visible: !_visible,
-              child: Padding(
-                padding: const EdgeInsets.only(top: 330,right: 18),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    FloatingActionButton(
-                      onPressed: (){
-                        setState(() {
-                          _visible = true;
-                        });
-                      },
-                      tooltip: 'take number',
-                      child: Icon(Icons.check),
-                    ),
-                  ],
-                ),
-              ),
-            )
-          ],
-        ),
-        ),
+          );
+        },
       ),
-    );
-  }
+    ),
+  );
 }
