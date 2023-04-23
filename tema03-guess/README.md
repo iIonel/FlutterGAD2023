@@ -1,6 +1,6 @@
 # tema03_guess
 
-Guess my number.
+Guess my number project.
 
 ![image](https://user-images.githubusercontent.com/45739581/233855398-38a45e77-1cb2-4e24-9cb4-05e659d717d7.png)
 ![image](https://user-images.githubusercontent.com/45739581/233855431-449cec5a-a1f9-4b9e-8743-fc9b354faf27.png)

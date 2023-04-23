@@ -1,9 +1,11 @@
 # tema01
 
-Euro-Lei Convertor
+Euro-Lei convertor project.
 
-![proba1](https://user-images.githubusercontent.com/45739581/230049549-076e0867-2a96-4a3a-ac4e-b98c5bbfa3ce.PNG)
-![proba2](https://user-images.githubusercontent.com/45739581/230049566-8c7f98b0-27f3-42fe-aae0-907b396fe523.PNG)
+![image](https://user-images.githubusercontent.com/45739581/233855791-78c1cccf-64e2-46c0-8759-71cef0d98813.png)
+![image](https://user-images.githubusercontent.com/45739581/233855805-19d6a868-a530-4cf9-87b0-88dc4deafeba.png)
+![image](https://user-images.githubusercontent.com/45739581/233855812-dee66bb6-fece-4441-9a69-3a451304814c.png)
+
 
 
 ## Getting Started
