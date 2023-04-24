@@ -5,7 +5,7 @@ void main() {
 }
 
 class App extends StatelessWidget {
-  const App({Key? key}) : super(key: key);
+  const App({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -15,13 +15,15 @@ class App extends StatelessWidget {
   }
 }
 
+// ignore: camel_case_types
 class _app extends StatefulWidget {
-  const _app({Key? key}) : super(key: key);
+  const _app();
 
   @override
   State<_app> createState() => _appState();
 }
 
+// ignore: camel_case_types
 class _appState extends State<_app> {
   final TextEditingController _text = TextEditingController();
   bool _empty = true;
@@ -29,37 +31,42 @@ class _appState extends State<_app> {
   bool _screen = false;
 
   bool numeric(String s) {
+    // ignore: unnecessary_null_comparison
     if (s == null) {
       return false;
     }
+    // ignore: prefer_final_locals
     double? number = double.tryParse(s);
-    if (number == null)
+    if (number == null) {
       return false;
-    else if (number > 0)
+    } else if (number > 0) {
       return true;
-    else
+    } else {
       return false;
+    }
   }
 
   String? get _error {
     _empty = false;
-    final text = _text.value.text;
-    if (numeric(text)) return null;
-    if (text.isNotEmpty)
-      return 'please enter a number';
-    else if (numeric(text))
+    final String text = _text.value.text;
+    if (numeric(text)) {
       return null;
-    else if (text.isEmpty) {
-      return null;
-      _empty = true;
     }
+    if (text.isNotEmpty) {
+      return 'please enter a number';
+    } else if (numeric(text)) {
+      return null;
+    } else if (text.isEmpty) {
+      return null;
+    }
+    return null;
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Center(
+        title: const Center(
           child: Text(
             'Currency convertor',
             textAlign: TextAlign.left,
@@ -67,20 +74,18 @@ class _appState extends State<_app> {
         ),
       ),
       body: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
-          Image(
+          const Image(
             image: AssetImage('assets/images/money.jpg'),
           ),
           Container(
-            padding: EdgeInsets.all(20),
+            padding: const EdgeInsets.all(20),
             child: TextField(
               controller: _text,
               keyboardType: TextInputType.number,
-              obscureText: false,
               decoration: InputDecoration(
                 hintText: 'enter the amount in EUR',
-                border: UnderlineInputBorder(
+                border: const UnderlineInputBorder(
                   borderSide: BorderSide(
                     color: Colors.blueAccent,
                   ),
@@ -97,15 +102,17 @@ class _appState extends State<_app> {
               setState(() {
                 if (_empty == false && _error == null) {
                   _euro = double.tryParse(_text.value.text)!;
+                  // ignore: prefer_final_locals
                   double leiParse = _euro * 4.5;
                   _lei = double.parse(leiParse.toStringAsFixed(2));
-                  print('$_lei RON');
+                  //print('$_lei RON');
                   _screen = true;
-                } else
+                } else {
                   _screen = false;
+                }
               });
             },
-            child: Text(
+            child: const Text(
               'CONVERT!',
               style: TextStyle(
                 color: Colors.black,
@@ -116,12 +123,12 @@ class _appState extends State<_app> {
               child: _screen
                   ? Text(
                       '$_lei RON',
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: Colors.black54,
                         fontSize: 40,
                       ),
                     )
-                  : Text(
+                  : const Text(
                       '',
                     ))
         ],
