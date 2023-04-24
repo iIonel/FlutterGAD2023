@@ -1,6 +1,6 @@
 # tema02
 
-numnber shapes project.
+number shapes project.
 ![image](https://user-images.githubusercontent.com/45739581/233859861-f2ba5561-d9c8-4ff8-8ade-3d75e58cd3d4.png)
 ![image](https://user-images.githubusercontent.com/45739581/233859879-49b92205-9d2b-49c2-bcf0-3b767a7070cb.png)
 ![image](https://user-images.githubusercontent.com/45739581/233859891-5c802044-1b98-4f5e-8920-b4a8846fb015.png)
