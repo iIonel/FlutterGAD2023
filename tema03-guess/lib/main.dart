@@ -1,12 +1,12 @@
-import 'package:flutter/material.dart';
 import 'dart:math';
+import 'package:flutter/material.dart';
 
 void main() {
   runApp(const App());
 }
 
 class App extends StatelessWidget {
-  const App({Key? key}) : super(key: key);
+  const App({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -16,13 +16,15 @@ class App extends StatelessWidget {
   }
 }
 
+// ignore: camel_case_types
 class _app extends StatefulWidget {
-  const _app({Key? key}) : super(key: key);
+  const _app();
 
   @override
   State<_app> createState() => _appState();
 }
 
+// ignore: camel_case_types
 class _appState extends State<_app> {
   double _takeNumber = 0;
   double _sizeForText = 0;
@@ -32,23 +34,25 @@ class _appState extends State<_app> {
   bool _goodCheck = false;
 
   @override
-  void initState(){
+  void initState() {
     super.initState();
     generateNumber();
   }
 
-  Future<void> generateNumber() async{
-    Random random = new Random();
-    _guessNumber = 1 + random.nextInt(100-1);
+  Future<void> generateNumber() async {
+    // ignore: prefer_final_locals
+    Random random = Random();
+    _guessNumber = 1 + random.nextInt(100 - 1);
   }
 
-  void generateNumberAgain(){
-    Random random = new Random();
+  void generateNumberAgain() {
+    // ignore: prefer_final_locals
+    Random random = Random();
     _takeNumber = 0;
     _sizeForText = 0;
     _numberFromText = 0;
     _goodCheck = false;
-    _guessNumber = 1 + random.nextInt(100-1);
+    _guessNumber = 1 + random.nextInt(100 - 1);
   }
 
   @override
@@ -57,17 +61,16 @@ class _appState extends State<_app> {
       appBar: AppBar(
         title: Container(
           alignment: AlignmentDirectional.center,
-          child: Text(
+          child: const Text(
             'Guess my number',
           ),
         ),
       ),
       body: SingleChildScrollView(
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.only(top:15.0 ,left:20 ,right:20),
+            const Padding(
+              padding: EdgeInsets.only(top: 15.0, left: 20, right: 20),
               child: Text(
                 textAlign: TextAlign.center,
                 "I'm thinking of a number between 1 and 100",
@@ -77,8 +80,8 @@ class _appState extends State<_app> {
                 ),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.only(top:15.0 ,left:20 ,right:20),
+            const Padding(
+              padding: EdgeInsets.only(top: 15.0, left: 20, right: 20),
               child: Text(
                 textAlign: TextAlign.center,
                 "It's your turn to guess my number!",
@@ -93,7 +96,7 @@ class _appState extends State<_app> {
               child: Column(
                 children: <Widget>[
                   Padding(
-                    padding: const EdgeInsets.only(top:15),
+                    padding: const EdgeInsets.only(top: 15),
                     child: Text(
                       'You tried $_numberFromText',
                       style: TextStyle(
@@ -103,8 +106,10 @@ class _appState extends State<_app> {
                     ),
                   ),
                   Column(
+                    // ignore: always_specify_types
                     children: [
-                      if(_guessNumber == _numberFromText)...[
+                      // ignore: always_specify_types
+                      if (_guessNumber == _numberFromText) ...[
                         Text(
                           textAlign: TextAlign.center,
                           'You guessed right.',
@@ -114,7 +119,8 @@ class _appState extends State<_app> {
                           ),
                         ),
                       ],
-                      if(_guessNumber > _numberFromText)...[
+                      // ignore: always_specify_types
+                      if (_guessNumber > _numberFromText) ...[
                         Text(
                           'Try higher',
                           style: TextStyle(
@@ -123,7 +129,8 @@ class _appState extends State<_app> {
                           ),
                         ),
                       ],
-                      if(_guessNumber < _numberFromText) ...[
+                      // ignore: always_specify_types
+                      if (_guessNumber < _numberFromText) ...[
                         Text(
                           'Try lower',
                           style: TextStyle(
@@ -138,16 +145,16 @@ class _appState extends State<_app> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(top:15),
-              child: Container(
+              padding: const EdgeInsets.only(top: 15),
+              child: SizedBox(
                 width: 350,
                 height: 200,
                 child: Card(
                   elevation: 10,
                   child: Column(
                     children: <Widget>[
-                      Padding(
-                        padding: const EdgeInsets.only(top:15),
+                      const Padding(
+                        padding: EdgeInsets.only(top: 15),
                         child: Text(
                           'Try a number!',
                           style: TextStyle(
@@ -157,11 +164,11 @@ class _appState extends State<_app> {
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(top:20 ,right:15 ,left:15),
+                        padding: const EdgeInsets.only(top: 20, right: 15, left: 15),
                         child: TextField(
                           controller: _text,
                           keyboardType: TextInputType.number,
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                             border: UnderlineInputBorder(
                               borderSide: BorderSide(
                                 color: Colors.blueAccent,
@@ -171,16 +178,16 @@ class _appState extends State<_app> {
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(top:10),
-                        child: Container(
+                        padding: const EdgeInsets.only(top: 10),
+                        child: SizedBox(
                           width: 100,
                           child: TextButton(
                               style: ButtonStyle(
                                 backgroundColor: MaterialStateProperty.all<Color>(Colors.black26),
                               ),
-                              onPressed: (){
+                              onPressed: () {
                                 setState(() {
-                                  if(_goodCheck == false) {
+                                  if (_goodCheck == false) {
                                     //print(_guessNumber);
                                     _takeNumber = 1;
                                     _numberFromText = int.parse(_text.text);
@@ -189,29 +196,27 @@ class _appState extends State<_app> {
                                     if (_guessNumber == _numberFromText) {
                                       _goodCheck = true;
                                     }
-                                  }
-                                  else{
-                                    showAlert(context,_guessNumber);
+                                  } else {
+                                    showAlert(context, _guessNumber);
                                     generateNumberAgain();
                                   }
                                 });
                               },
                               child: Container(
                                 child: _goodCheck
-                                ?Text(
-                                  'Reset',
-                                  style: TextStyle(
-                                    color: Colors.black,
-                                  ),
-                                )
-                                :Text(
-                                  'Guess',
-                                  style: TextStyle(
-                                  color: Colors.black,
-                                  ),
-                                ),
-                              )
-                          ),
+                                    ? const Text(
+                                        'Reset',
+                                        style: TextStyle(
+                                          color: Colors.black,
+                                        ),
+                                      )
+                                    : const Text(
+                                        'Guess',
+                                        style: TextStyle(
+                                          color: Colors.black,
+                                        ),
+                                      ),
+                              )),
                         ),
                       )
                     ],
@@ -226,34 +231,36 @@ class _appState extends State<_app> {
   }
 }
 
-showAlert(BuildContext context,int number) {
+// ignore: always_declare_return_types
+showAlert(BuildContext context, int number) {
+  // ignore: prefer_final_locals
   Widget button = TextButton(
-
-      onPressed: (){
+      onPressed: () {
         Navigator.of(context).pop();
       },
-    child: Row(
-      mainAxisAlignment: MainAxisAlignment.end,
-      children: <Widget>[
-        Padding(
-          padding: const EdgeInsets.only(left: 40),
-          child: Text(
-            'Try Again!',
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: const <Widget>[
+          Padding(
+            padding: EdgeInsets.only(left: 40),
+            child: Text(
+              'Try Again!',
+            ),
           ),
-        ),
-        Padding(
-          padding: const EdgeInsets.only(left: 20),
-          child: Text(
-            'OK',
+          Padding(
+            padding: EdgeInsets.only(left: 20),
+            child: Text(
+              'OK',
+            ),
           ),
-        ),
-      ],
-    )
-  );
+        ],
+      ));
 
+  // ignore: prefer_final_locals
   AlertDialog alert = AlertDialog(
-    title: Text("You guessed right"),
-    content: Text("It was $number"),
+    title: const Text('You guessed right'),
+    content: Text('It was $number'),
+    // ignore: always_specify_types
     actions: [
       button,
     ],
