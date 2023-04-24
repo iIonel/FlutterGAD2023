@@ -5,7 +5,7 @@ void main() {
 }
 
 class TicTacToe extends StatelessWidget {
-  const TicTacToe({Key? key}) : super(key: key);
+  const TicTacToe({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +16,7 @@ class TicTacToe extends StatelessWidget {
 }
 
 class _TicTacToe extends StatefulWidget {
-  const _TicTacToe({Key? key}) : super(key: key);
+  const _TicTacToe();
 
   @override
   State<_TicTacToe> createState() => _TicTacToeState();
@@ -36,9 +36,10 @@ class _TicTacToeState extends State<_TicTacToe> {
 
   Future<void> resetGame() async{
     //create background colors for table
-    for(var i = 0; i < size; ++i){
+    for(int i = 0; i < size; ++i){
+      // ignore: prefer_final_locals
       List<Color> row = <Color>[];
-      for(var j = 0; j < size; ++j) {
+      for(int j = 0; j < size; ++j) {
         row.add(Colors.white);
       }
       table.add(row);
@@ -47,9 +48,10 @@ class _TicTacToeState extends State<_TicTacToe> {
 
   void newGame(){
     table.clear();
-    for(var i = 0; i < size; ++i){
+    for(int i = 0; i < size; ++i){
+      // ignore: prefer_final_locals
       List<Color> row = <Color>[];
-      for(var j = 0; j < size; ++j) {
+      for(int j = 0; j < size; ++j) {
         row.add(Colors.white);
       }
       table.add(row);
@@ -82,10 +84,11 @@ class _TicTacToeState extends State<_TicTacToe> {
       return true;
     }
     else{
-      for(var i = 0; i < size; ++i){
-        for(var j = 0; j < size; ++j){
-          if(table[i][j] == Colors.white)
+      for(int i = 0; i < size; ++i){
+        for(int j = 0; j < size; ++j){
+          if(table[i][j] == Colors.white) {
             return false;
+          }
         }
       }
       return true;
@@ -96,7 +99,7 @@ class _TicTacToeState extends State<_TicTacToe> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Center(
+        title: const Center(
           child: Text(
             'tic-tac-toe',
             style: TextStyle(
@@ -361,7 +364,7 @@ class _TicTacToeState extends State<_TicTacToe> {
                     end = false;
                   });
                 },
-                child: Text(
+                child: const Text(
                   'Play again!',
                   style: TextStyle(
                     color: Colors.black,
@@ -374,5 +377,3 @@ class _TicTacToeState extends State<_TicTacToe> {
     );
   }
 }
-
-
