@@ -1,5 +1,8 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
+import 'package:http/http.dart';
 
 void main() {
   runApp(randomApi());
@@ -26,20 +29,24 @@ class _randomApi extends StatefulWidget {
 class _randomApiState extends State<_randomApi> {
   TextEditingController _text = new TextEditingController();
   int size = 0;
-  List<Color> list = [];
+  List<Map<dynamic,dynamic>> allList = [];
 
-  Color generateItem(){
-    return Color((math.Random().nextDouble() * 0xFFFFFF).toInt()).withOpacity(1.0);
+  @override
+  void initState(){
+    super.initState();
   }
 
-  void takeInformations(){
-    list.clear();
+  void takeInformations() async{
+    allList.clear();
     size = 0;
     size = int.parse(_text.text);
-    for(int i = 0; i < size; ++i){
-      Color current = generateItem();
-      list.add(current);
-    }
+    String url = 'https://api.unsplash.com/photos/random?count=';
+    url += size.toString();
+    url += '&client_id=ClSY0Ge2qY2oUBtghWTlhlXd9s0yAIWVmAFfJ0UbOxM';
+    Uri uri = Uri.parse(url);
+    print(uri);
+    final response = await get(uri);
+    print(response.body);
   }
 
   @override
@@ -76,6 +83,7 @@ class _randomApiState extends State<_randomApi> {
                   ),
                   onPressed: (){
                     setState(() {
+
                       takeInformations();
                     });
                   },
@@ -88,18 +96,21 @@ class _randomApiState extends State<_randomApi> {
               ),
             ],
           ),
-          Container(
-            height: 200,
-            child: ListView(
-              scrollDirection: Axis.horizontal,
-              children:[
-                for(int i = 0; i < size; ++i)
-                  if(size > 0)
-                    Container(
-                      width: 160,
-                      color: list[i],
-                    ),
-              ]
+          Padding(
+            padding: const EdgeInsets.only(top:100,right: 8.0,left: 8.0),
+            child: Container(
+              height: 200,
+              child: ListView(
+                scrollDirection: Axis.horizontal,
+                children:[
+                  for(int i = 0; i < size; ++i)
+                    if(size > 0)
+                      Container(
+                        width: 160,
+                        color: Colors.red,
+                      ),
+                ]
+              ),
             ),
           ),
         ],
