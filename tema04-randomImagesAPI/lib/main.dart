@@ -30,6 +30,7 @@ class _randomApiState extends State<_randomApi> {
   TextEditingController _text = new TextEditingController();
   int size = 0;
   List<Map<dynamic,dynamic>> allList = [];
+  List<String> pictures = [];
 
   @override
   void initState(){
@@ -37,16 +38,27 @@ class _randomApiState extends State<_randomApi> {
   }
 
   void takeInformations() async{
-    allList.clear();
+
+    if(pictures.isNotEmpty)
+      pictures.clear();
+
+    if(allList.isNotEmpty)
+      allList.clear();
+
     size = 0;
     size = int.parse(_text.text);
-    String url = 'https://api.unsplash.com/photos/random?count=';
-    url += size.toString();
-    url += '&client_id=ClSY0Ge2qY2oUBtghWTlhlXd9s0yAIWVmAFfJ0UbOxM';
+    String url = 'https://api.unsplash.com/photos/random?count=$size&client_id=ClSY0Ge2qY2oUBtghWTlhlXd9s0yAIWVmAFfJ0UbOxM';
     Uri uri = Uri.parse(url);
     print(uri);
-    final response = await get(uri);
-    print(response.body);
+    Response response = await get(uri);
+    allList = jsonDecode(response.body) as List<Map<dynamic,dynamic>>;
+
+    for(int i = 0; i < allList.length; ++i){
+      Map<String,dynamic> item = allList[i] as Map<String,dynamic>;
+      Map<String,String> urls = item['urls'] as Map<String,String>;
+      String? currentPicture = urls['regular'];
+      pictures.add(currentPicture!);
+    }
   }
 
   @override
@@ -107,7 +119,9 @@ class _randomApiState extends State<_randomApi> {
                     if(size > 0)
                       Container(
                         width: 160,
-                        color: Colors.red,
+                        child: Image.network(
+                          pictures[i],
+                        ),
                       ),
                 ]
               ),
