@@ -31,7 +31,7 @@ mixin _$Picture {
   int get height => throw _privateConstructorUsedError;
   String get color => throw _privateConstructorUsedError;
   @JsonKey(name: 'blur_hash')
-  String get blurHash => throw _privateConstructorUsedError;
+  String? get blurHash => throw _privateConstructorUsedError;
   String? get description => throw _privateConstructorUsedError;
   @JsonKey(name: 'alt_description')
   String? get altDescription => throw _privateConstructorUsedError;
@@ -60,7 +60,7 @@ abstract class $PictureCopyWith<$Res> {
       int width,
       int height,
       String color,
-      @JsonKey(name: 'blur_hash') String blurHash,
+      @JsonKey(name: 'blur_hash') String? blurHash,
       String? description,
       @JsonKey(name: 'alt_description') String? altDescription,
       Urls urls,
@@ -94,7 +94,7 @@ class _$PictureCopyWithImpl<$Res, $Val extends Picture>
     Object? width = null,
     Object? height = null,
     Object? color = null,
-    Object? blurHash = null,
+    Object? blurHash = freezed,
     Object? description = freezed,
     Object? altDescription = freezed,
     Object? urls = null,
@@ -132,10 +132,10 @@ class _$PictureCopyWithImpl<$Res, $Val extends Picture>
           ? _value.color
           : color // ignore: cast_nullable_to_non_nullable
               as String,
-      blurHash: null == blurHash
+      blurHash: freezed == blurHash
           ? _value.blurHash
           : blurHash // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       description: freezed == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
@@ -207,7 +207,7 @@ abstract class _$$Picture$CopyWith<$Res> implements $PictureCopyWith<$Res> {
       int width,
       int height,
       String color,
-      @JsonKey(name: 'blur_hash') String blurHash,
+      @JsonKey(name: 'blur_hash') String? blurHash,
       String? description,
       @JsonKey(name: 'alt_description') String? altDescription,
       Urls urls,
@@ -241,7 +241,7 @@ class __$$Picture$CopyWithImpl<$Res>
     Object? width = null,
     Object? height = null,
     Object? color = null,
-    Object? blurHash = null,
+    Object? blurHash = freezed,
     Object? description = freezed,
     Object? altDescription = freezed,
     Object? urls = null,
@@ -279,10 +279,10 @@ class __$$Picture$CopyWithImpl<$Res>
           ? _value.color
           : color // ignore: cast_nullable_to_non_nullable
               as String,
-      blurHash: null == blurHash
+      blurHash: freezed == blurHash
           ? _value.blurHash
           : blurHash // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       description: freezed == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
@@ -326,7 +326,7 @@ class _$Picture$ implements Picture$ {
       required this.width,
       required this.height,
       required this.color,
-      @JsonKey(name: 'blur_hash') required this.blurHash,
+      @JsonKey(name: 'blur_hash') this.blurHash,
       this.description,
       @JsonKey(name: 'alt_description') this.altDescription,
       required this.urls,
@@ -357,7 +357,7 @@ class _$Picture$ implements Picture$ {
   final String color;
   @override
   @JsonKey(name: 'blur_hash')
-  final String blurHash;
+  final String? blurHash;
   @override
   final String? description;
   @override
@@ -452,7 +452,7 @@ abstract class Picture$ implements Picture {
       required final int width,
       required final int height,
       required final String color,
-      @JsonKey(name: 'blur_hash') required final String blurHash,
+      @JsonKey(name: 'blur_hash') final String? blurHash,
       final String? description,
       @JsonKey(name: 'alt_description') final String? altDescription,
       required final Urls urls,
@@ -482,7 +482,7 @@ abstract class Picture$ implements Picture {
   String get color;
   @override
   @JsonKey(name: 'blur_hash')
-  String get blurHash;
+  String? get blurHash;
   @override
   String? get description;
   @override

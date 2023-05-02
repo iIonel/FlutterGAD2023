@@ -16,7 +16,7 @@ _$Picture$ _$$Picture$FromJson(Map<String, dynamic> json) => _$Picture$(
       width: json['width'] as int,
       height: json['height'] as int,
       color: json['color'] as String,
-      blurHash: json['blur_hash'] as String,
+      blurHash: json['blur_hash'] as String?,
       description: json['description'] as String?,
       altDescription: json['alt_description'] as String?,
       urls: Urls.fromJson(json['urls'] as Map<String, dynamic>),

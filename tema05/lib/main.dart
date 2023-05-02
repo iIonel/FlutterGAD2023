@@ -128,11 +128,17 @@ class _UnsplashApiState extends State<_UnsplashApi> {
                           ),
                         ),
                       ),
-                      Text(
-                        picture.user.name,
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 10,
+                      Opacity(
+                        opacity: 0.6,
+                        child: Container(
+                          color: Colors.white,
+                          child: Text(
+                            picture.user.name,
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 10,
+                            ),
+                          ),
                         ),
                       ),
                     ],

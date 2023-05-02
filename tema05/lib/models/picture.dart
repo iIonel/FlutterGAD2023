@@ -12,7 +12,7 @@ class Picture with _$Picture{
     required int width,
     required int height,
     required String color,
-    @JsonKey(name: 'blur_hash') required String blurHash,
+    @JsonKey(name: 'blur_hash')String? blurHash,
     String? description,
     @JsonKey(name: 'alt_description') String? altDescription,
     required Urls urls,
