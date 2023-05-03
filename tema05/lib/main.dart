@@ -1,14 +1,14 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
-import 'package:tema05/models/picture.dart';
+import 'models/picture.dart';
 
 void main() {
-  runApp(UnsplashApi());
+  runApp(const UnsplashApi());
 }
 
 class UnsplashApi extends StatelessWidget {
-  const UnsplashApi({Key? key}) : super(key: key);
+  const UnsplashApi({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -20,16 +20,16 @@ class UnsplashApi extends StatelessWidget {
 }
 
 class _UnsplashApi extends StatefulWidget {
-  const _UnsplashApi({Key? key}) : super(key: key);
+  const _UnsplashApi();
 
   @override
   State<_UnsplashApi> createState() => _UnsplashApiState();
 }
 
 class _UnsplashApiState extends State<_UnsplashApi> {
-  TextEditingController _text = new TextEditingController();
-  List<Picture> _images = <Picture>[];
-  final ScrollController _controller = new ScrollController();
+  final TextEditingController _text = TextEditingController();
+  final List<Picture> _images = <Picture>[];
+  final ScrollController _controller = ScrollController();
   int _page = 1;
   bool _isLoading = false;
 
@@ -52,15 +52,16 @@ class _UnsplashApiState extends State<_UnsplashApi> {
   Future<void> takeInformations({String? search,required int page}) async {
     setState(() {
       _isLoading = true;
-      if (_page == 1)
+      if (_page == 1) {
         _images.clear();
+      }
     });
-    String? query = search;
-    Uri uri = Uri.parse(
+    final String? query = search;
+    final Uri uri = Uri.parse(
         'https://api.unsplash.com/search/photos?query=$query&per_page=30&page=$page&client_id=8WjK2yVLo44CSuJt9b63wmIcYrb3DStxEZOBEGQAT3Y');
-    Response response = await get(uri);
-    Map<String, dynamic> resultsSearch = jsonDecode(response.body) as Map<String, dynamic>;
-    List<dynamic> resultsImages = resultsSearch['results'] as List<dynamic>;
+    final Response response = await get(uri);
+    final Map<String, dynamic> resultsSearch = jsonDecode(response.body) as Map<String, dynamic>;
+    final List<dynamic> resultsImages = resultsSearch['results'] as List<dynamic>;
     setState(() {
       _images.addAll(
           resultsImages.cast<Map<dynamic, dynamic>>().map((Map<dynamic, dynamic> json) => Picture.fromJson(json)));
@@ -82,12 +83,12 @@ class _UnsplashApiState extends State<_UnsplashApi> {
             padding: const EdgeInsets.all(8.0),
             child: TextField(
               controller: _text,
-              onSubmitted: (_text){
+              onSubmitted: (String text){
                 setState(() {
-                  takeInformations(search: _text.toString(),page: 1);
+                  takeInformations(search: text,page: 1);
                 });
               },
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelStyle: TextStyle(
                   color: Colors.white,
                 ),
@@ -130,11 +131,11 @@ class _UnsplashApiState extends State<_UnsplashApi> {
                       ),
                       Opacity(
                         opacity: 0.6,
-                        child: Container(
+                        child: ColoredBox(
                           color: Colors.white,
                           child: Text(
                             picture.user.name,
-                            style: TextStyle(
+                            style: const TextStyle(
                               color: Colors.black,
                               fontSize: 10,
                             ),
@@ -147,20 +148,20 @@ class _UnsplashApiState extends State<_UnsplashApi> {
                 Align(
                   alignment: Alignment.bottomLeft,
                   child: Container(
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                         gradient: LinearGradient(
                             begin: AlignmentDirectional.bottomCenter,
                             end: AlignmentDirectional.topCenter,
-                            colors: [
+                            colors: <Color>[
                               Colors.black54,
                               Colors.transparent,
                             ]
                         )
                     ),
                     child: Row(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
+                      children: <Widget>[
+                        const Padding(
+                          padding: EdgeInsets.all(8.0),
                           child: Icon(
                             Icons.heart_broken_rounded,
                             color: Colors.red,
@@ -168,7 +169,7 @@ class _UnsplashApiState extends State<_UnsplashApi> {
                         ),
                         Text(
                           picture.likes.toString(),
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 15,
                           ),
                         )
@@ -187,4 +188,3 @@ class _UnsplashApiState extends State<_UnsplashApi> {
     );
   }
 }
-
