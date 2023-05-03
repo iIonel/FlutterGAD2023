@@ -29,64 +29,56 @@ class _TicTacToeState extends State<_TicTacToe> {
   bool end = false;
 
   @override
-  void initState(){
+  void initState() {
     super.initState();
     resetGame();
   }
 
-  Future<void> resetGame() async{
+  Future<void> resetGame() async {
     //create background colors for table
-    for(int i = 0; i < size; ++i){
+    for (int i = 0; i < size; ++i) {
       // ignore: prefer_final_locals
       List<Color> row = <Color>[];
-      for(int j = 0; j < size; ++j) {
+      for (int j = 0; j < size; ++j) {
         row.add(Colors.white);
       }
       table.add(row);
     }
   }
 
-  void newGame(){
+  void newGame() {
     table.clear();
-    for(int i = 0; i < size; ++i){
+    for (int i = 0; i < size; ++i) {
       // ignore: prefer_final_locals
       List<Color> row = <Color>[];
-      for(int j = 0; j < size; ++j) {
+      for (int j = 0; j < size; ++j) {
         row.add(Colors.white);
       }
       table.add(row);
     }
   }
 
-  bool endGame(){
-    if(table[0][0] == table[0][1] && table[0][1] == table[0][2] && table[0][0] != Colors.white){
+  bool endGame() {
+    if (table[0][0] == table[0][1] && table[0][1] == table[0][2] && table[0][0] != Colors.white) {
       return true;
-    }
-    else if(table[1][0] == table[1][1] && table[1][1] == table[1][2] && table[1][0] != Colors.white){
+    } else if (table[1][0] == table[1][1] && table[1][1] == table[1][2] && table[1][0] != Colors.white) {
       return true;
-    }
-    else if(table[2][0] == table[2][1] && table[2][1] == table[2][2] && table[2][0] != Colors.white){
+    } else if (table[2][0] == table[2][1] && table[2][1] == table[2][2] && table[2][0] != Colors.white) {
       return true;
-    }
-    else if(table[0][0] == table[1][0] && table[1][0] == table[2][0] && table[0][0] != Colors.white){
+    } else if (table[0][0] == table[1][0] && table[1][0] == table[2][0] && table[0][0] != Colors.white) {
       return true;
-    }
-    else if(table[0][1] == table[1][1] && table[1][1] == table[2][1] && table[0][1] != Colors.white){
+    } else if (table[0][1] == table[1][1] && table[1][1] == table[2][1] && table[0][1] != Colors.white) {
       return true;
-    }
-    else if(table[0][2] == table[1][2] && table[1][2] == table[2][2] && table[0][2] != Colors.white){
+    } else if (table[0][2] == table[1][2] && table[1][2] == table[2][2] && table[0][2] != Colors.white) {
       return true;
-    }
-    else if(table[0][0] == table[1][1] && table[1][1] == table[2][2] && table[0][0] != Colors.white){
+    } else if (table[0][0] == table[1][1] && table[1][1] == table[2][2] && table[0][0] != Colors.white) {
       return true;
-    }
-    else if(table[0][2] == table[1][1] && table[1][1] == table[2][0] && table[0][2] != Colors.white){
+    } else if (table[0][2] == table[1][1] && table[1][1] == table[2][0] && table[0][2] != Colors.white) {
       return true;
-    }
-    else{
-      for(int i = 0; i < size; ++i){
-        for(int j = 0; j < size; ++j){
-          if(table[i][j] == Colors.white) {
+    } else {
+      for (int i = 0; i < size; ++i) {
+        for (int j = 0; j < size; ++j) {
+          if (table[i][j] == Colors.white) {
             return false;
           }
         }
@@ -116,14 +108,13 @@ class _TicTacToeState extends State<_TicTacToe> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               GestureDetector(
-                onTap: (){
+                onTap: () {
                   setState(() {
-                    if(table[0][0] == Colors.white) {
+                    if (table[0][0] == Colors.white) {
                       table[0][0] = currentColor;
-                      if(currentColor == Colors.red){
+                      if (currentColor == Colors.red) {
                         currentColor = Colors.green;
-                      }
-                      else{
+                      } else {
                         currentColor = Colors.red;
                       }
                     }
@@ -141,14 +132,13 @@ class _TicTacToeState extends State<_TicTacToe> {
                 ),
               ),
               GestureDetector(
-                onTap: (){
+                onTap: () {
                   setState(() {
-                    if(table[0][1] == Colors.white) {
+                    if (table[0][1] == Colors.white) {
                       table[0][1] = currentColor;
-                      if(currentColor == Colors.red){
+                      if (currentColor == Colors.red) {
                         currentColor = Colors.green;
-                      }
-                      else{
+                      } else {
                         currentColor = Colors.red;
                       }
                     }
@@ -166,14 +156,13 @@ class _TicTacToeState extends State<_TicTacToe> {
                 ),
               ),
               GestureDetector(
-                onTap: (){
+                onTap: () {
                   setState(() {
-                    if(table[0][2] == Colors.white) {
+                    if (table[0][2] == Colors.white) {
                       table[0][2] = currentColor;
-                      if(currentColor == Colors.red){
+                      if (currentColor == Colors.red) {
                         currentColor = Colors.green;
-                      }
-                      else{
+                      } else {
                         currentColor = Colors.red;
                       }
                     }
@@ -196,14 +185,13 @@ class _TicTacToeState extends State<_TicTacToe> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               GestureDetector(
-                onTap: (){
+                onTap: () {
                   setState(() {
-                    if(table[1][0] == Colors.white) {
+                    if (table[1][0] == Colors.white) {
                       table[1][0] = currentColor;
-                      if(currentColor == Colors.red){
+                      if (currentColor == Colors.red) {
                         currentColor = Colors.green;
-                      }
-                      else{
+                      } else {
                         currentColor = Colors.red;
                       }
                     }
@@ -221,14 +209,13 @@ class _TicTacToeState extends State<_TicTacToe> {
                 ),
               ),
               GestureDetector(
-                onTap: (){
+                onTap: () {
                   setState(() {
-                    if(table[1][1] == Colors.white) {
+                    if (table[1][1] == Colors.white) {
                       table[1][1] = currentColor;
-                      if(currentColor == Colors.red){
+                      if (currentColor == Colors.red) {
                         currentColor = Colors.green;
-                      }
-                      else{
+                      } else {
                         currentColor = Colors.red;
                       }
                     }
@@ -246,14 +233,13 @@ class _TicTacToeState extends State<_TicTacToe> {
                 ),
               ),
               GestureDetector(
-                onTap: (){
+                onTap: () {
                   setState(() {
-                    if(table[1][2] == Colors.white) {
+                    if (table[1][2] == Colors.white) {
                       table[1][2] = currentColor;
-                      if(currentColor == Colors.red){
+                      if (currentColor == Colors.red) {
                         currentColor = Colors.green;
-                      }
-                      else{
+                      } else {
                         currentColor = Colors.red;
                       }
                     }
@@ -276,14 +262,13 @@ class _TicTacToeState extends State<_TicTacToe> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               GestureDetector(
-                onTap: (){
+                onTap: () {
                   setState(() {
-                    if(table[2][0] == Colors.white) {
+                    if (table[2][0] == Colors.white) {
                       table[2][0] = currentColor;
-                      if(currentColor == Colors.red){
+                      if (currentColor == Colors.red) {
                         currentColor = Colors.green;
-                      }
-                      else{
+                      } else {
                         currentColor = Colors.red;
                       }
                     }
@@ -301,14 +286,13 @@ class _TicTacToeState extends State<_TicTacToe> {
                 ),
               ),
               GestureDetector(
-                onTap: (){
+                onTap: () {
                   setState(() {
-                    if(table[2][1] == Colors.white) {
+                    if (table[2][1] == Colors.white) {
                       table[2][1] = currentColor;
-                      if(currentColor == Colors.red){
+                      if (currentColor == Colors.red) {
                         currentColor = Colors.green;
-                      }
-                      else{
+                      } else {
                         currentColor = Colors.red;
                       }
                     }
@@ -326,14 +310,13 @@ class _TicTacToeState extends State<_TicTacToe> {
                 ),
               ),
               GestureDetector(
-                onTap: (){
+                onTap: () {
                   setState(() {
-                    if(table[2][2] == Colors.white) {
+                    if (table[2][2] == Colors.white) {
                       table[2][2] = currentColor;
-                      if(currentColor == Colors.red){
+                      if (currentColor == Colors.red) {
                         currentColor = Colors.green;
-                      }
-                      else{
+                      } else {
                         currentColor = Colors.red;
                       }
                     }
@@ -355,21 +338,21 @@ class _TicTacToeState extends State<_TicTacToe> {
           Visibility(
             visible: end,
             child: TextButton(
-                style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all<Color>(Colors.black26),
+              style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.all<Color>(Colors.black26),
+              ),
+              onPressed: () {
+                setState(() {
+                  newGame();
+                  end = false;
+                });
+              },
+              child: const Text(
+                'Play again!',
+                style: TextStyle(
+                  color: Colors.black,
                 ),
-                onPressed: (){
-                  setState(() {
-                    newGame();
-                    end = false;
-                  });
-                },
-                child: const Text(
-                  'Play again!',
-                  style: TextStyle(
-                    color: Colors.black,
-                  ),
-                ),
+              ),
             ),
           ),
         ],

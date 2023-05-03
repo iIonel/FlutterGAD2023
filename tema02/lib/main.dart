@@ -27,26 +27,26 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   final TextEditingController _number = TextEditingController();
   String _option = '';
 
-  bool isSquare(int number){
+  bool isSquare(int number) {
     // ignore: prefer_final_locals
     double square = sqrt(number);
-    if(number == square.toInt()*square.toInt()) {
+    if (number == square.toInt() * square.toInt()) {
       return true;
     }
     return false;
   }
 
-  bool isTriangle(int number){
-   for(int i = 0; i < sqrt(number); ++i){
-     if(i * i * i == number) {
-       return true;
-     }
-   }
+  bool isTriangle(int number) {
+    for (int i = 0; i < sqrt(number); ++i) {
+      if (i * i * i == number) {
+        return true;
+      }
+    }
     return false;
   }
 
-  bool isNeither(int number){
-    if(isTriangle(number) == false && isSquare(number) == false) {
+  bool isNeither(int number) {
+    if (isTriangle(number) == false && isSquare(number) == false) {
       return true;
     }
     return false;
@@ -55,84 +55,72 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Center(
-            child: Text(
-                'Number Shapes',
-            )
-        ),
-      ),
-      body: GestureDetector(
-        onTap: (){
-          setState(() {
-
-          });
-        },
-        child: SingleChildScrollView(
-          child: Column(
-          children: <Widget>[
-            const Padding(
-              padding: EdgeInsets.all(15),
+        appBar: AppBar(
+          title: const Center(
               child: Text(
-                'Please input a number to see if it is square or triangular.',
-                style: TextStyle(
-                  fontSize: 20,
-                ),
+            'Number Shapes',
+          )),
+        ),
+        body: GestureDetector(
+            onTap: () {
+              setState(() {});
+            },
+            child: SingleChildScrollView(
+              child: Column(
+                children: <Widget>[
+                  const Padding(
+                    padding: EdgeInsets.all(15),
+                    child: Text(
+                      'Please input a number to see if it is square or triangular.',
+                      style: TextStyle(
+                        fontSize: 20,
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(15),
+                    child: TextField(
+                      controller: _number,
+                      keyboardType: TextInputType.number,
+                      // ignore: always_specify_types
+                      inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 550, left: 300),
+                    child: FloatingActionButton(
+                      onPressed: () {
+                        setState(() {
+                          // ignore: prefer_final_locals
+                          int numberFromText = int.parse(_number.text);
+                          if (isTriangle(numberFromText) == true && isSquare(numberFromText) == false) {
+                            _option = 'triangle';
+                          } else if (isSquare(numberFromText) == true && isTriangle(numberFromText) == false) {
+                            _option = 'square';
+                          } else if (isNeither(numberFromText) == true) {
+                            _option = 'neither';
+                          } else {
+                            _option = 'either';
+                          }
+                          showAlert(context, numberFromText, _option);
+                        });
+                      },
+                      tooltip: 'take number',
+                      child: const Icon(Icons.check),
+                    ),
+                  ),
+                ],
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(15),
-              child: TextField(
-                  controller: _number,
-                  keyboardType: TextInputType.number,
-                  // ignore: always_specify_types
-                  inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(top: 550, left: 300),
-              child: FloatingActionButton(
-                onPressed: (){
-                  setState(() {
-                    // ignore: prefer_final_locals
-                    int numberFromText = int.parse(_number.text);
-                    if(isTriangle(numberFromText) == true && isSquare(numberFromText) == false){
-                      _option = 'triangle';
-                    }
-                    else if(isSquare(numberFromText) == true && isTriangle(numberFromText) == false){
-                      _option = 'square';
-                    }
-                    else if(isNeither(numberFromText) == true){
-                      _option = 'neither';
-                    }
-                    else{
-                      _option = 'either';
-                    }
-                    showAlert(context,numberFromText,_option);
-                  });
-                  },
-                tooltip: 'take number',
-                child: const Icon(Icons.check),
-              ),
-            ),
-            ],
-          ),
-        )
-      )
-    );
+            )));
   }
 }
 
 // ignore: always_declare_return_types
-showAlert(BuildContext context,int number, String option) {
-
+showAlert(BuildContext context, int number, String option) {
   showDialog(
-      context: context,
-      builder: (_) => AlertDialog(
-      shape: const RoundedRectangleBorder(
-        borderRadius:
-        BorderRadius.all(Radius.circular(10.0))
-      ),
+    context: context,
+    builder: (_) => AlertDialog(
+      shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(10.0))),
       content: Builder(
         builder: (BuildContext context) {
           final double height = MediaQuery.of(context).size.height;
@@ -149,34 +137,34 @@ showAlert(BuildContext context,int number, String option) {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(top:20),
+                  padding: const EdgeInsets.only(top: 20),
                   child: Column(
                     // ignore: always_specify_types
                     children: [
                       // ignore: always_specify_types
-                      if(option == 'square')...[
+                      if (option == 'square') ...[
                         Text(
                           'Number $number is SQUARE',
                         ),
                       ]
                       // ignore: always_specify_types
-                      else if(option == 'triangle')...[
+                      else if (option == 'triangle') ...[
                         Text(
                           'Number $number is TRIANGLE',
                         ),
                       ]
                       // ignore: always_specify_types
-                      else if(option == 'neither')...[
-                          Text(
-                            'Number $number is neither SQUARE and TRIANGLE',
-                          ),
-                        ]
-                        // ignore: always_specify_types
-                        else if(option == 'either')...[
-                            Text(
-                              'Number $number is both SQUARE and TRIANGLE',
-                            ),
-                          ]
+                      else if (option == 'neither') ...[
+                        Text(
+                          'Number $number is neither SQUARE and TRIANGLE',
+                        ),
+                      ]
+                      // ignore: always_specify_types
+                      else if (option == 'either') ...[
+                        Text(
+                          'Number $number is both SQUARE and TRIANGLE',
+                        ),
+                      ]
                     ],
                   ),
                 ),

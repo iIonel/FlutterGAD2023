@@ -3,48 +3,49 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 
 void main() {
-  runApp(RandomApi());
+  runApp(const RandomApi());
 }
 
 class RandomApi extends StatelessWidget {
-  const RandomApi({Key? key}) : super(key: key);
+  const RandomApi({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       home: _RandomApi(),
     );
   }
 }
 
 class _RandomApi extends StatefulWidget {
-  const _RandomApi({Key? key}) : super(key: key);
+  const _RandomApi();
 
   @override
   State<_RandomApi> createState() => _RandomApiState();
 }
 
 class _RandomApiState extends State<_RandomApi> {
-  List<dynamic> allList = [];
-  List<String> pictures = [];
+  List<dynamic> allList = <dynamic>[];
+  List<String> pictures = <String>[];
 
   @override
-  void initState(){
+  void initState() {
     super.initState();
     takeInformations();
   }
 
-  Future<void> takeInformations() async{
-    String url = 'https://api.unsplash.com/photos/random?count=30&client_id=ClSY0Ge2qY2oUBtghWTlhlXd9s0yAIWVmAFfJ0UbOxM';
-    Uri uri = Uri.parse(url);
-    Response response = await get(uri);
+  Future<void> takeInformations() async {
+    const String url =
+        'https://api.unsplash.com/photos/random?count=30&client_id=ClSY0Ge2qY2oUBtghWTlhlXd9s0yAIWVmAFfJ0UbOxM';
+    final Uri uri = Uri.parse(url);
+    final Response response = await get(uri);
     allList = jsonDecode(response.body) as List<dynamic>;
 
-    for(int i = 0; i < allList.length; ++i){
-      Map<String,dynamic> item = allList[i] as Map<String,dynamic>;
-      Map<String,dynamic> urls = item['urls'] as Map<String,dynamic>;
-      String? currentPicture = urls['regular'];
-      pictures.add(currentPicture!);
+    for (int i = 0; i < allList.length; ++i) {
+      final Map<String, dynamic> item = allList[i] as Map<String, dynamic>;
+      final Map<String, dynamic> urls = item['urls'] as Map<String, dynamic>;
+      final String currentPicture = urls['regular'] as String;
+      pictures.add(currentPicture);
     }
   }
 
@@ -53,7 +54,7 @@ class _RandomApiState extends State<_RandomApi> {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: Center(
+          title: const Center(
             child: Text(
               'Random Images Generator',
             ),
@@ -62,12 +63,12 @@ class _RandomApiState extends State<_RandomApi> {
         body: Padding(
           padding: const EdgeInsets.only(top: 50, left: 10, right: 10),
           child: SingleChildScrollView(
-            child: Container(
+            child: SizedBox(
               height: 500,
               child: ListView(
-                children: [
-                  for(int i = 0; i < allList.length; ++i)
-                    Container(
+                children: <Widget>[
+                  for (int i = 0; i < allList.length; ++i)
+                    SizedBox(
                       width: 300,
                       height: 300,
                       child: Image.network(
@@ -83,4 +84,3 @@ class _RandomApiState extends State<_RandomApi> {
     );
   }
 }
-
