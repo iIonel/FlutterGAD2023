@@ -3,7 +3,7 @@ part 'picture.freezed.dart';
 part 'picture.g.dart';
 
 @freezed
-class Picture with _$Picture{
+class Picture with _$Picture {
   const factory Picture({
     required String id,
     // ignore: invalid_annotation_target
@@ -16,7 +16,7 @@ class Picture with _$Picture{
     required int height,
     required String color,
     // ignore: invalid_annotation_target
-    @JsonKey(name: 'blur_hash')String? blurHash,
+    @JsonKey(name: 'blur_hash') String? blurHash,
     String? description,
     // ignore: invalid_annotation_target
     @JsonKey(name: 'alt_description') String? altDescription,
@@ -26,8 +26,8 @@ class Picture with _$Picture{
     // ignore: invalid_annotation_target
     @JsonKey(name: 'liked_by_user') required bool likedByUser,
     required User user,
-}) = Picture$;
-  factory Picture.fromJson(Map<dynamic,dynamic> json)=> _$PictureFromJson(Map<String,dynamic>.from(json));
+  }) = Picture$;
+  factory Picture.fromJson(Map<dynamic, dynamic> json) => _$PictureFromJson(Map<String, dynamic>.from(json));
 }
 
 @freezed
@@ -39,8 +39,8 @@ class Urls with _$Urls {
     required String small,
     required String thumb,
     // ignore: invalid_annotation_target
-    @JsonKey(name: 'small_s3')required String smallS3,
-}) = Urls$;
+    @JsonKey(name: 'small_s3') required String smallS3,
+  }) = Urls$;
 
   factory Urls.fromJson(Map<dynamic, dynamic> json) => _$UrlsFromJson(Map<String, dynamic>.from(json));
 }
@@ -53,7 +53,7 @@ class Links with _$Links {
     required String download,
     // ignore: invalid_annotation_target
     @JsonKey(name: 'download_location') required String downloadLocation,
-}) = Links$;
+  }) = Links$;
 
   factory Links.fromJson(Map<dynamic, dynamic> json) => _$LinksFromJson(Map<String, dynamic>.from(json));
 }
@@ -61,38 +61,38 @@ class Links with _$Links {
 @freezed
 class User with _$User {
   const factory User({
-      required String id,
+    required String id,
     // ignore: invalid_annotation_target
-      @JsonKey(name: 'updated_at') required DateTime updatedAt,
-      required String username,
-      required String name,
+    @JsonKey(name: 'updated_at') required DateTime updatedAt,
+    required String username,
+    required String name,
     // ignore: invalid_annotation_target
-      @JsonKey(name: 'first_name') required String firstName,
+    @JsonKey(name: 'first_name') required String firstName,
     // ignore: invalid_annotation_target
-      @JsonKey(name: 'last_name') String? lastName,
+    @JsonKey(name: 'last_name') String? lastName,
     // ignore: invalid_annotation_target
-      @JsonKey(name: 'twitter_username') String? twitterUsername,
+    @JsonKey(name: 'twitter_username') String? twitterUsername,
     // ignore: invalid_annotation_target
-      @JsonKey(name: 'portofolio_url') String? portfolioUrl,
-      String? bio,
-      String? location,
-      required UserLinks links,
+    @JsonKey(name: 'portofolio_url') String? portfolioUrl,
+    String? bio,
+    String? location,
+    required UserLinks links,
     // ignore: invalid_annotation_target
-      @JsonKey(name: 'profile_image')required UserProfileImages profileImages,
+    @JsonKey(name: 'profile_image') required UserProfileImages profileImages,
     // ignore: invalid_annotation_target
-      @JsonKey(name: 'instagram_username') String? instagramUsername,
+    @JsonKey(name: 'instagram_username') String? instagramUsername,
     // ignore: invalid_annotation_target
-      @JsonKey(name: 'total_collections')required int totalCollections,
+    @JsonKey(name: 'total_collections') required int totalCollections,
     // ignore: invalid_annotation_target
-      @JsonKey(name: 'total_likes')required int totalLikes,
+    @JsonKey(name: 'total_likes') required int totalLikes,
     // ignore: invalid_annotation_target
-      @JsonKey(name: 'total_photos')required int totalPhotos,
+    @JsonKey(name: 'total_photos') required int totalPhotos,
     // ignore: invalid_annotation_target
-      @JsonKey(name: 'accepted_tos')required bool acceptedTos,
+    @JsonKey(name: 'accepted_tos') required bool acceptedTos,
     // ignore: invalid_annotation_target
-      @JsonKey(name: 'for_hire')required bool forHire,
-      required UserSocial social,
-}) = User$;
+    @JsonKey(name: 'for_hire') required bool forHire,
+    required UserSocial social,
+  }) = User$;
 
   factory User.fromJson(Map<dynamic, dynamic> json) => _$UserFromJson(Map<String, dynamic>.from(json));
 }
@@ -107,33 +107,35 @@ class UserLinks with _$UserLinks {
     required String portfolio,
     required String following,
     required String followers,
-}) = UserLinks$;
+  }) = UserLinks$;
 
   factory UserLinks.fromJson(Map<dynamic, dynamic> json) => _$UserLinksFromJson(Map<String, dynamic>.from(json));
 }
+
 @freezed
 class UserProfileImages with _$UserProfileImages {
   const factory UserProfileImages({
     required String small,
     required String medium,
     required String large,
-}) = UserProfileImages$;
+  }) = UserProfileImages$;
 
-  factory UserProfileImages.fromJson(Map<dynamic, dynamic> json) => _$UserProfileImagesFromJson(Map<String, dynamic>.from(json));
+  factory UserProfileImages.fromJson(Map<dynamic, dynamic> json) =>
+      _$UserProfileImagesFromJson(Map<String, dynamic>.from(json));
 }
 
 @freezed
 class UserSocial with _$UserSocial {
   const factory UserSocial({
     // ignore: invalid_annotation_target
-  @JsonKey(name: 'instagram_username') String? instagramUsername,
+    @JsonKey(name: 'instagram_username') String? instagramUsername,
     // ignore: invalid_annotation_target
-  @JsonKey(name: 'portfolio_url') String? portfolioUrl,
+    @JsonKey(name: 'portfolio_url') String? portfolioUrl,
     // ignore: invalid_annotation_target
-  @JsonKey(name: 'twitter_username') String? twitterUsername,
+    @JsonKey(name: 'twitter_username') String? twitterUsername,
     // ignore: invalid_annotation_target
-  @JsonKey(name: 'paypal_email') String? paypalEmail,
-}) = UserSocial$;
+    @JsonKey(name: 'paypal_email') String? paypalEmail,
+  }) = UserSocial$;
 
   factory UserSocial.fromJson(Map<dynamic, dynamic> json) => _$UserSocialFromJson(Map<String, dynamic>.from(json));
 }

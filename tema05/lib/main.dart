@@ -12,7 +12,7 @@ class UnsplashApi extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  MaterialApp(
+    return MaterialApp(
       theme: ThemeData.dark(),
       home: const _UnsplashApi(),
     );
@@ -34,22 +34,22 @@ class _UnsplashApiState extends State<_UnsplashApi> {
   bool _isLoading = false;
 
   @override
-  void initState(){
+  void initState() {
     super.initState();
     _controller.addListener(_onScroll);
   }
 
-  void _onScroll(){
+  void _onScroll() {
     final double offset = _controller.position.pixels;
     final double maxScrollExtent = _controller.position.maxScrollExtent;
     final double height = MediaQuery.of(context).size.height;
-    if(!_isLoading && maxScrollExtent - offset < 3 * height){
+    if (!_isLoading && maxScrollExtent - offset < 3 * height) {
       _page++;
       takeInformations(page: _page);
     }
   }
 
-  Future<void> takeInformations({String? search,required int page}) async {
+  Future<void> takeInformations({String? search, required int page}) async {
     setState(() {
       _isLoading = true;
       if (_page == 1) {
@@ -70,7 +70,7 @@ class _UnsplashApiState extends State<_UnsplashApi> {
   }
 
   @override
-  void dispose(){
+  void dispose() {
     _controller.dispose();
     super.dispose();
   }
@@ -78,34 +78,34 @@ class _UnsplashApiState extends State<_UnsplashApi> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: TextField(
-              controller: _text,
-              onSubmitted: (String text){
-                setState(() {
-                  takeInformations(search: text,page: 1);
-                });
-              },
-              decoration: const InputDecoration(
-                labelStyle: TextStyle(
-                  color: Colors.white,
-                ),
-                hintText: 'Search',
-                hintStyle: TextStyle(
-                  color: Colors.white,
-                ),
+      appBar: AppBar(
+        title: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: TextField(
+            controller: _text,
+            onSubmitted: (String text) {
+              setState(() {
+                takeInformations(search: text, page: 1);
+              });
+            },
+            decoration: const InputDecoration(
+              labelStyle: TextStyle(
+                color: Colors.white,
+              ),
+              hintText: 'Search',
+              hintStyle: TextStyle(
+                color: Colors.white,
               ),
             ),
           ),
         ),
-      body:Padding(
-        padding: const EdgeInsets.only(right: 10,left: 10),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.only(right: 10, left: 10),
         child: GridView.builder(
           controller: _controller,
           itemCount: _images.length,
-          itemBuilder: (BuildContext context, int index){
+          itemBuilder: (BuildContext context, int index) {
             final Picture picture = _images[index];
             return Stack(
               fit: StackFit.expand,
@@ -153,11 +153,9 @@ class _UnsplashApiState extends State<_UnsplashApi> {
                             begin: AlignmentDirectional.bottomCenter,
                             end: AlignmentDirectional.topCenter,
                             colors: <Color>[
-                              Colors.black54,
-                              Colors.transparent,
-                            ]
-                        )
-                    ),
+                          Colors.black54,
+                          Colors.transparent,
+                        ])),
                     child: Row(
                       children: <Widget>[
                         const Padding(
@@ -179,7 +177,8 @@ class _UnsplashApiState extends State<_UnsplashApi> {
                 )
               ],
             );
-          }, gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          },
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
             childAspectRatio: 0.69,
           ),
